@@ -1,5 +1,3 @@
-import { SvgIconTypeMap } from "@material-ui/core";
-import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import React, { FC } from "react";
 import "./InputOption.css";
 

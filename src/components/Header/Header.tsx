@@ -7,8 +7,18 @@ import ChatIcon from "@material-ui/icons/Chat";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import "./Header.css";
 import HeaderOptions from "./HeaderOptions";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "../../redux/userSlice";
+import { auth } from "../Firebase/Firebase";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+
+  const logoutApp = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
   return (
     <div className="header">
       {/* Left Header */}
@@ -33,8 +43,9 @@ const Header = () => {
         <HeaderOptions Icon={ChatIcon} Title="Messaging" />
         <HeaderOptions Icon={NotificationsIcon} Title="Notifications" />
         <HeaderOptions
-          avatar="https://scontent.fkhi2-1.fna.fbcdn.net/v/t1.0-9/126332725_211358687161666_4697850064909604332_o.jpg?_nc_cat=111&ccb=2&_nc_sid=a4a2d7&_nc_ohc=S3OybW5qYZ8AX9MHHLd&_nc_ht=scontent.fkhi2-1.fna&oh=15b3524cd652e2a0caf50fb9e581e659&oe=6009C61F"
-          Title="Me"
+          avatar={user?.photoUrl}
+          Title={user?.displayName}
+          onClick={logoutApp}
         />
       </div>
     </div>
